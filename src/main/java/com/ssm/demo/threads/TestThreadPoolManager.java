@@ -1,12 +1,10 @@
 package com.ssm.demo.threads;
 
-import org.LatencyUtils.TimeServices;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.stereotype.Component;
 
-import javax.print.DocFlavor;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.*;
@@ -28,7 +26,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
     //线程池维护线程所允许的空闲时间
     private final static int KEEP_ALIVE_TIME = 0;
     //线程池所使用的缓冲队列大小
-    private final static int WORK_QUEUE_SEZI = 50;
+    private final static int WORK_QUEUE_SIZE = 50;
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
@@ -62,7 +60,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
      * 创建线程池
      */
     final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(CORE_POOL_SIZE,MAX_POOL_SIZE,
-            KEEP_ALIVE_TIME,TimeUnit.SECONDS,new ArrayBlockingQueue<>(WORK_QUEUE_SEZI),this.handler);
+            KEEP_ALIVE_TIME,TimeUnit.SECONDS,new ArrayBlockingQueue<>(WORK_QUEUE_SIZE),this.handler);
 
     /**
      * 将任务加入订单线程池
@@ -90,7 +88,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
         public void run() {
             //判断缓冲队列是否存在记录
             if(!msgQueue.isEmpty()){
-                if(threadPool.getQueue().size()<WORK_QUEUE_SEZI){
+                if(threadPool.getQueue().size()<WORK_QUEUE_SIZE){
                     String orderId = (String) msgQueue.poll();
                     BusinessThread businessThread = new BusinessThread(orderId);
                     threadPool.execute(businessThread);

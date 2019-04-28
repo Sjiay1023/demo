@@ -2,7 +2,6 @@ package com.ssm.demo.threads;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import sun.net.idn.Punycode;
 
 /**
  *
