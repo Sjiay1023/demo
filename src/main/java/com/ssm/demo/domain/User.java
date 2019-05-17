@@ -1,5 +1,7 @@
 package com.ssm.demo.domain;
 
+import java.util.List;
+
 /**
  * 实体类
  */
@@ -7,6 +9,7 @@ public class User {
     private Long id;
     private String name;
     private int age;
+    private List<Course> courses;
 
     public Long getId() {
         return id;
@@ -30,6 +33,14 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     @Override

@@ -22,4 +22,31 @@ public interface UserMapper{
 
    @Select("select * from user where id=#{ids}")
    public User selectUserById(int id);
+
+   /**
+    * 根据id查询
+    * @param id
+    * @return
+    */
+   public User getById(Integer id);
+
+   /**
+    * 查询全部
+    * @return
+    */
+   public List<User> list();
+
+   /**
+    * 插入
+    * @param user
+    * @return
+    */
+   public int insert(User user);
+
+    /**
+     * 根据id查询所有课程
+     * @param id
+     * @return
+     */
+   public User selectCourseById(Integer id);
 }

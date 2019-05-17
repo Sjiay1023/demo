@@ -3,8 +3,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.demo.dao.UserMapper">
+    <!-- 根据name查询-->
     <select id="selectUserByName" resultType="com.ssm.demo.domain.User">
         select * from user where name=#{name}
     </select>
+    <!-- 根据id查询-->
+    <select id="getById" parameterType="int" resultType="User">
+        select * from user where id=#{id}
+    </select>
+    <!-- 查询所有-->
+    <select id="list" parameterType="int" resultType="User">
+        select * from user
+    </select>
+    <!-- 插入-->
+    <insert id="insert" parameterType="User">
+        insert into user(id,name,age) values (#{id},#{name},#{age})
+    </insert>
+    
+    <resultMap type="user" id="courseMap">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="age" column="age"></result>
+        <collection property="courses" ofType="course">
+            <id property="id" column="cid"></id>
+            <result property="course" column="course"></result>
+            <result property="userId" column="userId"></result>
+        </collection>
+    </resultMap>
+    <!-- 根据id查询课程-->
+    <select id="selectCourseById" parameterType="int" resultMap="courseMap">
+        select a.*,b.id cid,b.course,b.userId from user a,course b where a.id=b.userId and a.id=#{id};
+    </select>
+
 
 </mapper>

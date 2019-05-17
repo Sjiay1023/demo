@@ -1,13 +1,10 @@
 package com.ssm.demo.controller;
 
 import com.ssm.demo.aop.AopMessage;
-import com.ssm.demo.aop.UseCaseAnnotation;
 import com.ssm.demo.domain.User;
 import com.ssm.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
 @RestController
 public class UserController {
     @Autowired
-    private UserService userService;
+        private UserService userService;
 
     @AopMessage(description="根据name查找")
     @RequestMapping(value = "find")
@@ -34,6 +31,26 @@ public class UserController {
     @RequestMapping(value = "search/{id}")
     public User findUserById(@PathVariable("id") int id){
         return userService.findUserById(id);
+    }
+
+    @GetMapping("/user/{id}")
+    public  User getById(@PathVariable("id") Integer id){
+        return userService.getById(id);
+    }
+
+    @GetMapping("/users")
+    public List<User> list(){
+        return userService.list();
+    }
+
+    @RequestMapping(value = "/user",method = RequestMethod.POST)
+    public void insert(@RequestBody User user){
+        userService.insert(user);
+    }
+
+    @GetMapping("user/course/{id}")
+    public User selectCourseById(@PathVariable("id") Integer id){
+        return userService.selectCourseById(id);
     }
 
 }

@@ -11,4 +11,8 @@ public interface UserService {
     public User find(String name);
     public List<User> findUserLikeName(String name);
     public User findUserById(int id);
+    public User getById(Integer id);
+    public List<User> list();
+    public void insert(User user);
+    public User selectCourseById(Integer id);
 }
