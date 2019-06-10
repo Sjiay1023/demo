@@ -1,10 +1,12 @@
 package com.ssm.demo.service.impl;
 
 import com.ssm.demo.dao.UserMapper;
+import com.ssm.demo.domain.Student;
 import com.ssm.demo.domain.User;
 import com.ssm.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,38 +19,47 @@ public class UserServiceImpl implements UserService {
     private  UserMapper userMapper;
 
     @Override
-    public User find(String name) {
+    public Student find(String name) {
         return userMapper.selectUserByName(name);
     }
 
     @Override
-    public List<User> findUserLikeName(String name) {
+    public List<Student> findUserLikeName(String name) {
         return userMapper.selectUserLikeName("%"+name+"%");
     }
 
     @Override
-    public User findUserById(int id) {
+    public Student findUserById(int id) {
 
         return userMapper.selectUserById(id);
     }
 
     @Override
-    public User getById(Integer id) {
+    public Student getById(Integer id) {
         return userMapper.getById(id);
     }
 
     @Override
-    public List<User> list() {
+    public List<Student> list() {
         return userMapper.list();
     }
 
     @Override
-    public void insert(User user) {
-        userMapper.insert(user);
+    @Transactional
+    public void insert(Student student) {
+        userMapper.insert(student);
+//        if(1==1){
+//            throw new NullPointerException();
+//        }
     }
 
     @Override
-    public User selectCourseById(Integer id) {
+    public Student selectCourseById(Integer id) {
         return userMapper.selectCourseById(id);
+    }
+
+    @Override
+    public User selectByUserNamePassword(String userName, String password) {
+        return userMapper.selectByUserNamePassword(userName,password);
     }
 }

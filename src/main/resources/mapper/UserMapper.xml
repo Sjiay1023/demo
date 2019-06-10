@@ -4,23 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.demo.dao.UserMapper">
     <!-- 根据name查询-->
-    <select id="selectUserByName" resultType="com.ssm.demo.domain.User">
-        select * from user where name=#{name}
+    <select id="selectUserByName" resultType="com.ssm.demo.domain.Student">
+        select * from student where name=#{name}
     </select>
     <!-- 根据id查询-->
-    <select id="getById" parameterType="int" resultType="User">
-        select * from user where id=#{id}
+    <select id="getById" parameterType="int" resultType="Student">
+        select * from student where id=#{id}
     </select>
     <!-- 查询所有-->
-    <select id="list" parameterType="int" resultType="User">
-        select * from user
+    <select id="list" parameterType="int" resultType="Student">
+        select * from student
     </select>
     <!-- 插入-->
-    <insert id="insert" parameterType="User">
-        insert into user(id,name,age) values (#{id},#{name},#{age})
+    <insert id="insert" parameterType="Student">
+        insert into student(id,name,age) values (#{id},#{name},#{age})
     </insert>
     
-    <resultMap type="user" id="courseMap">
+    <resultMap type="student" id="courseMap">
         <id property="id" column="id"></id>
         <result property="name" column="name"></result>
         <result property="age" column="age"></result>
@@ -32,8 +32,22 @@
     </resultMap>
     <!-- 根据id查询课程-->
     <select id="selectCourseById" parameterType="int" resultMap="courseMap">
-        select a.*,b.id cid,b.course,b.userId from user a,course b where a.id=b.userId and a.id=#{id};
+        select a.*,b.id cid,b.course,b.userId from student a,course b where a.id=b.userId and a.id=#{id};
     </select>
 
+    <resultMap id="BaseResultMap" type="com.ssm.demo.domain.User" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="INTEGER" />
+        <result column="is_active" property="isActive" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <select id="selectByUserNamePassword" resultMap="BaseResultMap">
+    SELECT *
+    FROM user WHERE user_name=#{userName} AND password=#{password}
+    AND is_active=1
+  </select>
 
 </mapper>

@@ -1,54 +1,79 @@
 package com.ssm.demo.domain;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * 实体类
  */
 public class User {
-    private Long id;
-    private String name;
-    private int age;
-    private List<Course> courses;
+    private Integer id;
 
-    public Long getId() {
+    private String userName;
+
+    private String password;
+
+    private Integer sex;
+
+    private Integer isActive;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
-    public int getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    public List<Course> getCourses() {
-        return courses;
+    public Integer getSex() {
+        return sex;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
-    @Override
-    public String toString(){
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

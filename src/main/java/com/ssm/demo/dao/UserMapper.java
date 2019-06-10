@@ -1,7 +1,9 @@
 package com.ssm.demo.dao;
 
+import com.ssm.demo.domain.Student;
 import com.ssm.demo.domain.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -15,38 +17,47 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserMapper{
-   public User selectUserByName(String name);
+   public Student selectUserByName(String name);
 
-   @Select("select * from user where name like #{name}")
-   public List<User> selectUserLikeName(String name);
+   @Select("select * from student where name like #{name}")
+   public List<Student> selectUserLikeName(String name);
 
-   @Select("select * from user where id=#{ids}")
-   public User selectUserById(int id);
+   @Select("select * from student where id=#{id}")
+   public Student selectUserById(int id);
 
    /**
     * 根据id查询
     * @param id
     * @return
     */
-   public User getById(Integer id);
+   public Student getById(Integer id);
 
    /**
     * 查询全部
     * @return
     */
-   public List<User> list();
+   public List<Student> list();
 
    /**
     * 插入
-    * @param user
+    * @param student
     * @return
     */
-   public int insert(User user);
+   public int insert(Student student);
 
     /**
      * 根据id查询所有课程
      * @param id
      * @return
      */
-   public User selectCourseById(Integer id);
+   public Student selectCourseById(Integer id);
+
+   /*
+    * 登录时查询用户名和密码
+    * @param userName
+    * @param password
+    * @return
+    */
+   User selectByUserNamePassword(@Param("userName") String userName,@Param("password")  String password);
+
 }

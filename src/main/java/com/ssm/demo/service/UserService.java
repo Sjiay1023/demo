@@ -1,5 +1,6 @@
 package com.ssm.demo.service;
 
+import com.ssm.demo.domain.Student;
 import com.ssm.demo.domain.User;
 
 import java.util.List;
@@ -8,11 +9,13 @@ import java.util.List;
  * 业务实现接口
  */
 public interface UserService {
-    public User find(String name);
-    public List<User> findUserLikeName(String name);
-    public User findUserById(int id);
-    public User getById(Integer id);
-    public List<User> list();
-    public void insert(User user);
-    public User selectCourseById(Integer id);
+    public Student find(String name);
+    public List<Student> findUserLikeName(String name);
+    public Student findUserById(int id);
+    public Student getById(Integer id);
+    public List<Student> list();
+    public void insert(Student student);
+    public Student selectCourseById(Integer id);
+
+    public User selectByUserNamePassword(String userName,String password);
 }
